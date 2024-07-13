@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal</title>
+</head>
+<body>
+    <form>
+        <input id="myCoolAddress" type="text" placeholder="Address">
+        <input id="myCoolCity" type="text" placeholder="City">
+        <select id="myCoolState">
+            <option value="CA">CA</option>
+            <option value="CO">CO</option>
+            <option value="NY">NY</option>
+            <option value="TX">TX</option>
+            <option value="UT">UT</option>
+        </select>
+        <input id="myCoolZip" type="text" placeholder="ZIP Code">
+    </form>
+
+    <script src="/src/smarty-us-address-autocomplete.js"></script>
+    <script>
+        const mySmarty = SmartyUsAddressAutocomplete({
+            embeddedKey: 'YOUR EMBEDDED KEY GOES HERE',
+            addressId: 'myCoolAddress',
+            cityId: 'myCoolCity',
+            stateId: 'myCoolState',
+            zipCodeId: 'myCoolZip',
+        });
+    </script>
+</body>
+</html>
