@@ -16,7 +16,8 @@
         styleRowPaddingString: '8px',
         styleBoxPixelWidthInt: 300,
         styleBoxPixelHeightInt: 300,
-        styleSelectedSuggestionColorHexString: '#e0e0ff',
+        styleSelectedSuggestionColorHexString: '#fff',
+        styleSelectedSuggestionBackgroundColorHexString: '#000',
         suggestionElement: document.createElement('div'),
         suggestionId: null,
         offsetHeight: 20,
@@ -24,7 +25,7 @@
         activeStyles: "",
         inactiveStyles: 'display: none;',
         selectedIndex: 0,
-        numberOfSuggestionsRendered: 0,
+        lastAction: "",
     };
 
     const wrapperStyles = `
@@ -67,12 +68,16 @@
             selected
         });
       
-        const request = await fetch(
-            `https://us-autocomplete-pro.api.smarty.com/lookup?${params}`
-        );
-        const data = await request.json();
-      
-        if (data?.suggestions?.length > 0) formatSuggestions(data.suggestions);
+        try {
+            const request = await fetch(
+                `https://us-autocomplete-pro.api.smarty.com/lookup?${params}`
+            );
+            const data = await request.json();
+          
+            if (data?.suggestions?.length > 0) formatSuggestions(data.suggestions);
+        } catch(e) {
+            console.error(e.message);
+        }
     };
 
     const applyStyles = (element, styles) => {
@@ -92,9 +97,12 @@
             styleColorHexString,
             styleFontSizePixelInt,
             styleSelectedSuggestionColorHexString,
+            styleSelectedSuggestionBackgroundColorHexString,
+            activeStyles,
         } = settings;
 
-        settings.numberOfSuggestionsRendered = suggestions.length;
+        suggestionElement.innerHTML = '';
+        suggestionElement.style.cssText = activeStyles;
 
         const formattedSuggestions = suggestions.map((suggestion, index) => {
             const divElement = document.createElement("div");
@@ -105,7 +113,10 @@
             divElement.style['fontSize'] = `${styleFontSizePixelInt}px`;
 
             if (index === 0) {
-                divElement.style['backgroundColor'] = styleSelectedSuggestionColorHexString;
+                applyStyles(divElement, {
+                    color: styleSelectedSuggestionColorHexString,
+                    backgroundColor: styleSelectedSuggestionBackgroundColorHexString,
+                });
                 settings.selectedIndex = 0;
             }
 
@@ -124,6 +135,7 @@
             } ${city} ${state} ${zipcode}`;
 
             divElement.addEventListener('mouseover', () => {
+                if (settings.lastAction === 'keyboard') return;
                 applyStyles(divElement, {
                     backgroundColor: styleHoverBackgroundColorHexString,
                     color: styleHoverColorHexString,
@@ -140,7 +152,6 @@
             divElement.addEventListener("click", async () => {
                 const streetLineWithSecondary = `${street_line} ${secondary}`.trim();
                 if (hasSecondaryData) {
-                    suggestionElement.innerHTML = "";
                     const selected = `${streetLineWithSecondary} (${entries}) ${city} ${state} ${zipcode}`;
                     await sendLookupRequest(streetLineWithSecondary, selected);
                 } else {
@@ -163,6 +174,25 @@
         document.getElementById(stateId).value = state;
         document.getElementById(zipCodeId).value = zipcode;
     };
+
+    const scrollWrapperToSelected = () => {
+        const {selectedIndex, suggestionElement} = settings;
+        const elements = document.getElementsByClassName('smarty-suggestion');
+        if (selectedIndex >= 0 && selectedIndex < elements.length) {
+            const selectedChild = elements[selectedIndex];
+            const wrapperRect = suggestionElement.getBoundingClientRect();
+            const selectedRect = selectedChild.getBoundingClientRect();
+    
+            // Check if selected child is above the viewport
+            if (selectedRect.top < wrapperRect.top) {
+                suggestionElement.scrollTop -= (wrapperRect.top - selectedRect.top);
+            }
+            // Check if selected child is below the viewport
+            else if (selectedRect.bottom > wrapperRect.bottom) {
+                suggestionElement.scrollTop += (selectedRect.bottom - wrapperRect.bottom);
+            }
+        }
+    }
 
     SmartyUsAddressAutocomplete = (userSettings) => {
         settings = extendSettings(settings, userSettings);
@@ -190,7 +220,11 @@
         suggestionElement.style.cssText = inactiveStyles;
 
         addressElement.addEventListener("keyup", (e) => {
-            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+            if ([
+                'Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'Tab', 'ArrowUp', 'ArrowDown', 
+                'ArrowLeft', 'ArrowRight', 'Escape', 'F1', 'F2', 'F3', 'F4', 'F5', 
+                'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12'
+            ].includes(e.key)) return;            
 
             if (e.key === 'Enter') {
                 const elements = document.getElementsByClassName('smarty-suggestion');
@@ -199,62 +233,80 @@
             }
 
             const searchValue = e.target.value;
-            suggestionElement.innerHTML = "";
+
             if (!searchValue) {
                 suggestionElement.style.cssText = inactiveStyles;
                 return;
             }
           
-            suggestionElement.style.cssText = activeStyles;
-          
             sendLookupRequest(searchValue);
         });
 
-        addressElement.addEventListener("keydown", (e) => {
+        addressElement.addEventListener("keydown", async (e) => {
             if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return;
 
             e.preventDefault();
 
             const {
-                numberOfSuggestionsRendered, 
-                selectedIndex, 
+                selectedIndex,
+                styleColorHexString, 
                 styleBackgroundColorHexString, 
                 styleSelectedSuggestionColorHexString,
+                styleSelectedSuggestionBackgroundColorHexString,
             } = settings;
 
             const elements = document.getElementsByClassName('smarty-suggestion');
 
-            if (numberOfSuggestionsRendered === selectedIndex + 1 && e.key === 'ArrowDown') {
-                // wrap to the top
-                elements[settings.selectedIndex].style['backgroundColor'] = styleBackgroundColorHexString;
+            [...elements].forEach((element) => {
+                applyStyles(element, {
+                    color: styleColorHexString,
+                    backgroundColor: styleBackgroundColorHexString,
+                });
+            });
+
+            if (elements.length === selectedIndex + 1 && e.key === 'ArrowDown') {
                 settings.selectedIndex = 0;
-                elements[settings.selectedIndex].style['backgroundColor'] = styleSelectedSuggestionColorHexString;
             } else if (selectedIndex === 0 && e.key === 'ArrowUp') {
-                // wrap to the bottom
-                elements[settings.selectedIndex].style['backgroundColor'] = styleBackgroundColorHexString;
                 settings.selectedIndex = elements.length - 1;
-                elements[settings.selectedIndex].style['backgroundColor'] = styleSelectedSuggestionColorHexString;
             } else if (e.key === 'ArrowDown') {
-                // go down
-                elements[settings.selectedIndex].style['backgroundColor'] = styleBackgroundColorHexString;
                 settings.selectedIndex += 1;
-                elements[settings.selectedIndex].style['backgroundColor'] = styleSelectedSuggestionColorHexString;
             } else {
-                // go up
-                elements[settings.selectedIndex].style['backgroundColor'] = styleBackgroundColorHexString;
                 settings.selectedIndex -= 1;
-                elements[settings.selectedIndex].style['backgroundColor'] = styleSelectedSuggestionColorHexString;
             }
+
+            applyStyles(elements[settings.selectedIndex], {
+                color: styleSelectedSuggestionColorHexString,
+                backgroundColor: styleSelectedSuggestionBackgroundColorHexString,
+            });
+            
+            settings.lastAction = 'keyboard';
+            scrollWrapperToSelected();
         });
 
-        suggestionElement.addEventListener('mouseover', () => {
-            const elements = document.getElementsByClassName('smarty-suggestion');
-            elements[settings.selectedIndex].style['backgroundColor'] = settings.styleBackgroundColorHexString;
+        suggestionElement.addEventListener('mousemove', (e) => {
+            settings.lastAction = 'mouse';
         });
 
-        suggestionElement.addEventListener('mouseout', () => {
+        suggestionElement.addEventListener('mouseover', (e) => {
+            if (settings.lastAction === 'keyboard') return;
+
+            const {styleBackgroundColorHexString, styleColorHexString} = settings;
             const elements = document.getElementsByClassName('smarty-suggestion');
-            elements[settings.selectedIndex].style['backgroundColor'] = settings.styleSelectedSuggestionColorHexString;
+            elements.forEach((element) => {
+                applyStyles(element, {
+                    color: styleColorHexString,
+                    backgroundColor: styleBackgroundColorHexString,
+                });
+            });
+        });
+
+        suggestionElement.addEventListener('mouseout', (e) => {
+            const elements = document.getElementsByClassName('smarty-suggestion');
+            const {selectedIndex, styleSelectedSuggestionColorHexString, styleSelectedSuggestionBackgroundColorHexString} = settings;
+            applyStyles(elements[selectedIndex], {
+                color: styleSelectedSuggestionColorHexString,
+                backgroundColor: styleSelectedSuggestionBackgroundColorHexString,
+            });
         });
 
         document.addEventListener('click', (e) => {
