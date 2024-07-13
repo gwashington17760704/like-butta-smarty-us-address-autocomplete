@@ -12,7 +12,8 @@
         styleBorderColorHexString: '#e0e0e0',
         styleBorderPixelWidthInt: 2,
         styleFontFamilyString: 'sans-serif',
-        styleRowPaddingString: '15px 25px',
+        styleFontSizePixelInt: 14,
+        styleRowPaddingString: '8px',
         styleBoxPixelWidthInt: 300,
         styleBoxPixelHeightInt: 300,
         suggestionElement: document.createElement('div'),
@@ -71,11 +72,32 @@
         if (data?.suggestions?.length > 0) formatSuggestions(data.suggestions);
     };
 
+    const applyStyles = (element, styles) => {
+        for (let property in styles) {
+            element.style[property] = styles[property];
+        }
+    };
+
     const formatSuggestions = (suggestions) => {
-        const {suggestionElement, inactiveStyles} = settings; 
+        const {
+            suggestionElement, 
+            inactiveStyles, 
+            styleRowPaddingString,
+            styleHoverBackgroundColorHexString,
+            styleHoverColorHexString,
+            styleBackgroundColorHexString,
+            styleColorHexString,
+            styleFontSizePixelInt
+        } = settings;
 
         const formattedSuggestions = suggestions.map((suggestion) => {
             const divElement = document.createElement("div");
+
+            divElement.classList.add('smarty-suggestion');
+
+            divElement.style['padding'] = styleRowPaddingString;
+            divElement.style['fontSize'] = `${styleFontSizePixelInt}px`;
+
             const {
                 street_line,
                 city,
@@ -89,6 +111,20 @@
             divElement.innerText = `${street_line} ${secondary} ${
                 hasSecondaryData ? `(${entries} entries)` : ""
             } ${city} ${state} ${zipcode}`;
+
+            divElement.addEventListener('mouseover', () => {
+                applyStyles(divElement, {
+                    backgroundColor: styleHoverBackgroundColorHexString,
+                    color: styleHoverColorHexString,
+                });
+            });
+
+            divElement.addEventListener('mouseout', () => {
+                applyStyles(divElement, {
+                    backgroundColor: styleBackgroundColorHexString,
+                    color: styleColorHexString,
+                });
+            });
         
             divElement.addEventListener("click", async () => {
                 const streetLineWithSecondary = `${street_line} ${secondary}`.trim();
@@ -156,7 +192,7 @@
         });
 
         document.addEventListener('click', (e) => {
-            if (!suggestionElement.contains(event.target)) {
+            if (!suggestionElement.contains(e.target) && !e.target.classList.contains('smarty-suggestion')) {
                 suggestionElement.style.cssText = inactiveStyles;
             }
         });
