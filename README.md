@@ -155,6 +155,10 @@ If you want to alter the colors and styling a bit you can include some additiona
 * `styleBorderPixelWidthInt`
     * Description: This is the border width (as an integer) for the pixel width for the container holding the address suggestions.
     * Default: Integer 2.
+  
+* `styleBorderRadiusInt`
+    * Description: This is the border radius (as an integer) in pixels for the container holding the address suggestions.
+    * Default: Integer 8.
  
 * `styleFontFamilyString`
     * Description: This is the font family string for the container holding the address suggestions.
