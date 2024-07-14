@@ -194,7 +194,7 @@
         }
     }
 
-    SmartyUsAddressAutocomplete = (userSettings) => {
+    LikeButtaSmartyUsAddressAutocomplete = (userSettings) => {
         settings = extendSettings(settings, userSettings);
 
         wrapElementsWithDiv(settings.addressId);
@@ -316,6 +316,6 @@
         });
     };
 
-    global.SmartyUsAddressAutocomplete = SmartyUsAddressAutocomplete;
+    global.LikeButtaSmartyUsAddressAutocomplete = LikeButtaSmartyUsAddressAutocomplete;
 
 })(window);
