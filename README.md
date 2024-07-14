@@ -64,9 +64,9 @@ It's just one line of code to pull it in from the CDN.  Make sure it's just abov
 
 The `SmartyUsAddressAutocomplete()` function inside the `<script>` tags takes just one argument -- an object containing all the properties (props) to get it working.
 
-## Examples
+## Example
 
-(Coming Soon)
+See the `example-minimal.html` file in the `examples` folder.
 
 ## Props
 
