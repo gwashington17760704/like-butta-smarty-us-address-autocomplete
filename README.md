@@ -85,7 +85,7 @@ Modify the properties inside the function argument object as needed to match up 
 </form>
 ```
 
-...then you'll your JavaScript at the bottom of your file (but just before the closing `</body>` tag) to look like this:
+...then you'll modify your JavaScript to look like this:
 
 ```javascript
 <script src="https://cdn.jsdelivr.net/gh/gwashington17760704/smarty-us-address-autocomplete/src/smarty-us-address-autocomplete.js"></script>
@@ -99,6 +99,8 @@ Modify the properties inside the function argument object as needed to match up 
   });
 </script>
 ```
+
+Reminder: This JavaScript code goes at the bottom of your HTML file just above the closing `</body>` tag.
 
 Be sure to go to [www.smarty.com](https://www.smarty.com) to create your account and setup your Embedded Key. Once you've setup your Embedded Key, copy it and paste it in place of the 'YOUR SMARTY EMBEDDED KEY GOES HERE' string.
 
