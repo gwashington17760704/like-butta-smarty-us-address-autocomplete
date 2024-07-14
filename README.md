@@ -1,8 +1,8 @@
-# Go-Anywhere Drop-in Pop-in Smarty US Address Autocomplete
+# (GAPFSUSAA) Goes-Anywhere, Pain-Free Smarty US Address Autocomplete
 
-This project lets you drop a few lines of JavaScript into your code to give you Smarty's US Address Autocomplete. There are zero external dependencies. It should play nice with all framesworks and libraries. If your form uses, or can use `id` attributes for your address, city, state, and ZIP Code fields, this should work for you. 
+This solution lets you drop a few lines of JavaScript into your code to give you Smarty's US Address Autocomplete. There are zero external dependencies. It should play nice with all framesworks and libraries. If your form uses, or can use `id` html attributes for your address, city, state, and ZIP Code fields, this should work for you. 
 
-If your HTML looks something like this:
+If your HTML looks something like this...
 
 ```html
 <!DOCTYPE html>
@@ -32,7 +32,7 @@ If your HTML looks something like this:
 </html>
 ```
 
-Then all you need to do to get up and running is place this code just before your closing `</body>` tag:
+...then all you need to get up and running is to place the JavaScript code below just before your closing `</body>` tag:
 
 ```javascript
 <script src="https://cdn.jsdelivr.net/gh/gwashington17760704/smarty-us-address-autocomplete/src/smarty-us-address-autocomplete.js"></script>
@@ -47,52 +47,135 @@ Then all you need to do to get up and running is place this code just before you
 </script>
 ```
 
-See how the `id` attributes are mapped into the JavaScript function? Yep, that's right: `myCoolAddress` maps to this function's `addressId` object property.  `myCoolCity` maps to `cityId` and so on.
+Check this out. Notice how the `id` attributes are mapped into the JavaScript function? Yep, that's right: `myCoolAddress` maps to the `addressId` object property.  `myCoolCity` maps to `cityId` and so on.
 
-What about custom styling? Yep, that's available too. See the [Props](#props) section below. 
+What about custom styling? That's available too. See the [Props](#props) section below. 
 
-Of course you'll need to get a [Smarty](https://www.smarty.com) account, and you'll need to create an Embedded Key pointed at your domain.
+Make sure you get a [Smarty](https://www.smarty.com) account and an Embedded Key pointed at your domain.
 
-## Installation
-It's just one line of code to pull it in from the CDN.  Make sure it's just above the closing `</body>` tag:
+## Installation and Example Usage
+This is the easy part. Just copy these lines of JavaScript code below and paste it just above the closing `</body>` tag:
 
 ```javascript
 <script src="https://cdn.jsdelivr.net/gh/gwashington17760704/smarty-us-address-autocomplete/src/smarty-us-address-autocomplete.js"></script>
+<script>
+  SmartyUsAddressAutocomplete({
+    embeddedKey: 'YOUR SMARTY EMBEDDED KEY GOES HERE',
+    addressId: 'myCoolAddress',
+    cityId: 'myCoolCity',
+    stateId: 'myCoolState',
+    zipCodeId: 'myCoolZip',
+  });
+</script>
 ```
 
-## Usage
+Modify the properties inside the function argument object as needed to match up with your address inputs. The above example is pretty minimal. Basically if your HTML has the following code...
 
-The `SmartyUsAddressAutocomplete()` function inside the `<script>` tags takes just one argument -- an object containing all the properties (props) to get it working.
+```html
+<form method="post" action="/save-shipping-address">
+    <input id="mySuperAmazingAddressId" type="text" />
+    <input id="mySuperAmazingCityId" type="text" />
+    <select id="mySuperAmazingStateId">
+        <option value="FL">FL</option>
+        <option value="CA">CA</option>
+        <option value="NY">NY</option>
+    </select>
+    <input id="mySuperAmazingZipCodeId" type="text" />
+    <button>Submit</button>
+</form>
+```
 
-## Example
+...then you'll your JavaScript at the bottom of your file (but just before the closing `</body>` tag) to look like this:
 
-See the `example-minimal.html` file in the `examples` folder.
+```javascript
+<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/smarty-us-address-autocomplete/src/smarty-us-address-autocomplete.js"></script>
+<script>
+  SmartyUsAddressAutocomplete({
+    embeddedKey: 'YOUR SMARTY EMBEDDED KEY GOES HERE',
+    addressId: 'mySuperAmazingAddressId',
+    cityId: 'mySuperAmazingCityId',
+    stateId: 'mySuperAmazingStateId',
+    zipCodeId: 'mySuperAmazingZipCodeId',
+  });
+</script>
+```
+
+Be sure to go to [www.smarty.com](https://www.smarty.com) to create your account and setup your Embedded Key. Once you've setup your Embedded Key, copy it and paste it in place of the 'YOUR SMARTY EMBEDDED KEY GOES HERE' string.
+
+See the `/examples/example-minimal.html` file to see a working example.
 
 ## Props
 
-The single argument that is passed into the `SmartyUSAddressAutocomplete()` function is an object with the following properties (props).
+If you want to alter the colors and styling a bit you can include some additional properties to the single argument object that is passed into the `SmartyUSAddressAutocomplete()` function. Change these properties to suit your configuration and styling needs. Here's a description of each property.
 
-```json
-{
-  embeddedKey: '', // this is a string containing your Smarty embedded key 
-  addressId: '', // this is a string containing the id of your street address field
-  cityId: '', // this is a string containing the id of your city field
-  stateId: '', // this is a string containing the id of your state field
-  zipCodeId: '', // this is a string containing the id of your zip code field
-  styleBackgroundColorHexString: '#fff', // this is the background color (in a hex string) where the address suggestions will be displayed
-  styleColorHexString: '#333', // this is the foreground color (in a hex string) for the address suggestions that will be displayed
-  styleHoverBackgroundColorHexString: '#ddd', // this is the background color (in a hex string) of the address suggestion row that is hovered over
-  styleHoverColorHexString: '#000', // this is the foreground color (in a hex string) for the address suggestion text in the row that is hovered over
-  styleBorderColorHexString: '#e0e0e0', // this is the border color (in a hex string) for the container holding the address suggestions
-  styleBorderPixelWidthInt: 2, // this is the border width (as an integer) for the pixel width for the container holding the address suggestions
-  styleFontFamilyString: 'sans-serif', // this is the font family string for the container holding the address suggestions
-  styleFontSizePixelInt: 14, // this is the font size (as an integer) in pixels for the address suggestions
-  styleRowPaddingString: '8px', // this is the padding string for each row containing an address suggestion
-  styleBoxPixelWidthInt: 300, // this is the width (as an integer) in pixels for the container holding the address suggestions
-  styleBoxPixelHeightInt: 300, // this is the height (as an integer) in pixels for the container holding the address suggestions
-  styleSelectedSuggestionColorHexString: '#fff', // this is the foreground text color of the selected address suggestion row when used with up and down arrow navigation
-  styleSelectedSuggestionBackgroundColorHexString: '#000', // this is the background color of the selected address suggestion row when used with up and down arrow navigation
-};
-```
+* `embeddedKey`
+    * Description: This is a string containing your Smarty embedded key.
+    * Default: Empty string.
 
-Change these settings to suit your configuration and styling needs.
+* `addressId`
+    * Description: This is a string containing the id of your street address field.
+    * Default: Empty string.
+
+* `cityId`
+    * Description: This is a string containing the id of your city field.
+    * Default: Empty string.
+ 
+* `stateId`
+    * Description: This is a string containing the id of your state field.
+    * Default: Empty string.
+
+* `zipCodeId`
+    * Description: This is a string containing the id of your zip code field.
+    * Default: Empty string.
+
+* `styleBackgroundColorHexString`
+    * Description: This is the background color (in a hex string) where the address suggestions will be displayed.
+    * Default: String '#fff'.
+
+* `styleColorHexString`
+    * Description: This is the foreground color (in a hex string) for the address suggestions that will be displayed.
+    * Default: String '#333'.
+
+* `styleHoverBackgroundColorHexString`
+    * Description: This is the background color (in a hex string) of the address suggestion row that is hovered over.
+    * Default: String '#ddd'.
+
+* `styleHoverColorHexString`
+    * Description: This is the foreground color (in a hex string) for the address suggestion text in the row that is hovered over.
+    * Default: String '#000'.
+ 
+* `styleBorderColorHexString`
+    * Description: This is the border color (in a hex string) for the container holding the address suggestions.
+    * Default: String '#e0e0e0'.
+
+* `styleBorderPixelWidthInt`
+    * Description: This is the border width (as an integer) for the pixel width for the container holding the address suggestions.
+    * Default: Integer 2.
+ 
+* `styleFontFamilyString`
+    * Description: This is the font family string for the container holding the address suggestions.
+    * Default: String 'sans-serif'.
+ 
+* `styleFontSizePixelInt`
+    * Description: This is the font size (as an integer) in pixels for the address suggestions.
+    * Default: Integer 14.
+
+* `styleRowPaddingString`
+    * Description: This is the padding string for each row containing an address suggestion.
+    * Default: String '8px'.
+ 
+* `styleBoxPixelWidthInt`
+    * Description: This is the width (as an integer) in pixels for the container holding the address suggestions.
+    * Default: Integer 300.
+
+* `styleBoxPixelHeightInt`
+    * Description: This is the height (as an integer) in pixels for the container holding the address suggestions.
+    * Default: Integer 300.
+
+* `styleSelectedSuggestionColorHexString`
+    * Description: This is the foreground text color of the selected address suggestion row when used with up and down arrow navigation.
+    * Default: String '#fff'.
+
+* `styleSelectedSuggestionBackgroundColorHexString`
+    * Description: This is the background color of the selected address suggestion row when used with up and down arrow navigation.
+    * Default: String '#000'.
