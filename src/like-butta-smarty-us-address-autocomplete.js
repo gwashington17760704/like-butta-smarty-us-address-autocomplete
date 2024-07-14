@@ -11,6 +11,7 @@
         styleHoverColorHexString: '#000',
         styleBorderColorHexString: '#e0e0e0',
         styleBorderPixelWidthInt: 2,
+        styleBorderRadiusInt: 8,
         styleFontFamilyString: 'sans-serif',
         styleFontSizePixelInt: 14,
         styleRowPaddingString: '8px',
@@ -207,7 +208,8 @@
             top: ${settings.offsetHeight}; 
             width: ${settings.styleBoxPixelWidthInt}px; 
             height: ${settings.styleBoxPixelHeightInt}px; 
-            border: solid ${settings.styleBorderPixelWidthInt}px ${settings.styleBorderColorHexString}; 
+            border: solid ${settings.styleBorderPixelWidthInt}px ${settings.styleBorderColorHexString};
+            border-radius: ${settings.styleBorderRadiusInt}px; 
             background-color: ${settings.styleBackgroundColorHexString};
             font-family: ${settings.styleFontFamilyString};
             color: ${settings.styleColorHexString};
