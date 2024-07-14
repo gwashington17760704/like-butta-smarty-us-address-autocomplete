@@ -35,9 +35,9 @@ If your HTML looks something like this...
 ...then all you need to get up and running is to place the JavaScript code below just before your closing `</body>` tag:
 
 ```javascript
-<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/smarty-us-address-autocomplete/src/smarty-us-address-autocomplete.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/like-butta-smarty-us-address-autocomplete/src/like-butta-smarty-us-address-autocomplete.js"></script>
 <script>
-  SmartyUsAddressAutocomplete({
+  LikeButtaSmartyUsAddressAutocomplete({
     embeddedKey: 'YOUR SMARTY EMBEDDED KEY GOES HERE',
     addressId: 'myCoolAddress',
     cityId: 'myCoolCity',
@@ -53,13 +53,15 @@ What about custom styling? That's available too. See the [Props](#props) section
 
 Make sure you get a [Smarty](https://www.smarty.com) account and an Embedded Key pointed at your domain.
 
+Hopefully this is truly, like butta for you 🧈. Cheers!
+
 ## Installation and Example Usage
 This is the easy part. Just copy these lines of JavaScript code below and paste it just above the closing `</body>` tag:
 
 ```javascript
-<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/smarty-us-address-autocomplete/src/smarty-us-address-autocomplete.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/like-butta-smarty-us-address-autocomplete/src/like-butta-smarty-us-address-autocomplete.js"></script>
 <script>
-  SmartyUsAddressAutocomplete({
+  LikeButtaSmartyUsAddressAutocomplete({
     embeddedKey: 'YOUR SMARTY EMBEDDED KEY GOES HERE',
     addressId: 'myCoolAddress',
     cityId: 'myCoolCity',
@@ -88,9 +90,9 @@ Modify the properties inside the function argument object as needed to match up 
 ...then you'll modify your JavaScript to look like this:
 
 ```javascript
-<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/smarty-us-address-autocomplete/src/smarty-us-address-autocomplete.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/like-butta-smarty-us-address-autocomplete/src/like-butta-smarty-us-address-autocomplete.js"></script>
 <script>
-  SmartyUsAddressAutocomplete({
+  LikeButtaSmartyUsAddressAutocomplete({
     embeddedKey: 'YOUR SMARTY EMBEDDED KEY GOES HERE',
     addressId: 'mySuperAmazingAddressId',
     cityId: 'mySuperAmazingCityId',
