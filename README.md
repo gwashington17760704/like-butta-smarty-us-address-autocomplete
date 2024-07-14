@@ -1,6 +1,6 @@
-# Goes-Anywhere, Pain-Free Smarty US Address Autocomplete (GAPFSUSAA)
+# "Like Butta" 🧈 Smarty US Address Autocomplete 🇺🇸
 
-This solution lets you painlessly drop a few lines of JavaScript into your code to give you Smarty's US Address Autocomplete. There are zero external dependencies. It should play nice with all framesworks and libraries. If your form uses, or can use `id` HTML attributes for your address, city, state, and ZIP Code fields, this should work for you. 
+This solution lets you painlessly drop a few lines of JavaScript into your code to give you Smarty's US Address Autocomplete. There are zero external dependencies. It should play nice with all frameworks and libraries. If your form uses, or can use `id` HTML attributes for your address, city, state, and ZIP Code fields, this should work for you. 
 
 If your HTML looks something like this...
 
