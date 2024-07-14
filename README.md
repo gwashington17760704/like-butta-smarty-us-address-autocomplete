@@ -32,7 +32,7 @@ If your HTML looks something like this...
 </html>
 ```
 
-...then all you need to get up and running is to place the JavaScript code below just before your closing `</body>` tag:
+...then, all you need to do to get up and running is to place the JavaScript code below just before your closing `</body>` tag:
 
 ```javascript
 <script src="https://cdn.jsdelivr.net/gh/gwashington17760704/like-butta-smarty-us-address-autocomplete/src/like-butta-smarty-us-address-autocomplete.js"></script>
@@ -47,13 +47,13 @@ If your HTML looks something like this...
 </script>
 ```
 
-Check this out. Notice how the `id` attributes are mapped into the JavaScript function? Yep, that's right: `myCoolAddress` maps to the `addressId` object property.  `myCoolCity` maps to `cityId` and so on.
+Check this out. Notice how the `id` attributes are mapped into the JavaScript function? Yep, that's right. `myCoolAddress` maps to the `addressId` object property.  `myCoolCity` maps to `cityId` and so on.
 
 What about custom styling? That's available too. See the [Props](#props) section below. 
 
 Make sure you get a [Smarty](https://www.smarty.com) account and an Embedded Key pointed at your domain.
 
-Hopefully this is truly, like butta for you 🧈. Cheers!
+Hopefully this is truly like butta for you 🧈. Cheers!
 
 ## Installation and Example Usage
 This is the easy part. Just copy these lines of JavaScript code below and paste it just above the closing `</body>` tag:
