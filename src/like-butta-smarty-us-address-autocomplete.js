@@ -7,7 +7,7 @@
         zipCodeId: 'zip',
         styleBackgroundColorHexString: '#fff',
         styleColorHexString: '#333',
-        styleHoverBackgroundColorHexString: '#ddd',
+        styleHoverBackgroundColorHexString: '#cfe8ff',
         styleHoverColorHexString: '#000',
         styleBorderColorHexString: '#e0e0e0',
         styleBorderPixelWidthInt: 2,
@@ -18,15 +18,15 @@
         styleBoxPixelWidthInt: 300,
         styleBoxPixelHeightInt: 300,
         styleSelectedSuggestionColorHexString: '#000',
-        styleSelectedSuggestionBackgroundColorHexString: '#ccc',
+        styleSelectedSuggestionBackgroundColorHexString: '#ddd',
         suggestionElement: document.createElement('div'),
         suggestionId: null,
         offsetHeight: 20,
         addressElement: null,
-        activeStyles: "",
+        activeStyles: '',
         inactiveStyles: 'display: none;',
         selectedIndex: 0,
-        lastAction: "",
+        lastAction: '',
     };
 
     const wrapperStyles = `
@@ -287,19 +287,6 @@
 
         suggestionElement.addEventListener('mousemove', (e) => {
             settings.lastAction = 'mouse';
-        });
-
-        suggestionElement.addEventListener('mouseover', (e) => {
-            if (settings.lastAction === 'keyboard') return;
-
-            const {styleBackgroundColorHexString, styleColorHexString} = settings;
-            const elements = document.getElementsByClassName('smarty-suggestion');
-            elements.forEach((element) => {
-                applyStyles(element, {
-                    color: styleColorHexString,
-                    backgroundColor: styleBackgroundColorHexString,
-                });
-            });
         });
 
         suggestionElement.addEventListener('mouseout', (e) => {

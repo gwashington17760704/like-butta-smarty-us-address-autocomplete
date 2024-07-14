@@ -142,7 +142,7 @@ If you want to alter the colors and styling a bit you can include some additiona
 
 * `styleHoverBackgroundColorHexString`
     * Description: This is the background color (in a hex string) of the address suggestion row that is hovered over.
-    * Default: String '#ddd'.
+    * Default: String '#cfe8ff'.
 
 * `styleHoverColorHexString`
     * Description: This is the foreground color (in a hex string) for the address suggestion text in the row that is hovered over.
@@ -182,8 +182,8 @@ If you want to alter the colors and styling a bit you can include some additiona
 
 * `styleSelectedSuggestionColorHexString`
     * Description: This is the foreground text color of the selected address suggestion row when used with up and down arrow navigation.
-    * Default: String '#fff'.
+    * Default: String '#000'.
 
 * `styleSelectedSuggestionBackgroundColorHexString`
     * Description: This is the background color of the selected address suggestion row when used with up and down arrow navigation.
-    * Default: String '#000'.
+    * Default: String '#ddd'.
