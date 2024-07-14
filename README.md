@@ -1,4 +1,4 @@
-# (GAPFSUSAA) Goes-Anywhere, Pain-Free Smarty US Address Autocomplete
+# Goes-Anywhere, Pain-Free Smarty US Address Autocomplete (GAPFSUSAA)
 
 This solution lets you painlessly drop a few lines of JavaScript into your code to give you Smarty's US Address Autocomplete. There are zero external dependencies. It should play nice with all framesworks and libraries. If your form uses, or can use `id` html attributes for your address, city, state, and ZIP Code fields, this should work for you. 
 
