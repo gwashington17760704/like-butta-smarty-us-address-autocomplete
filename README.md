@@ -35,7 +35,7 @@ If your HTML looks something like this...
 ...then, all you need to do to get up and running is to place the JavaScript code below just before your closing `</body>` tag:
 
 ```javascript
-<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/like-butta-smarty-us-address-autocomplete/src/like-butta-smarty-us-address-autocomplete.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/like-butta-smarty-us-address-autocomplete/src/like-butta-smarty-us-address-autocomplete.min.js"></script>
 <script>
   LikeButtaSmartyUsAddressAutocomplete({
     embeddedKey: 'YOUR SMARTY EMBEDDED KEY GOES HERE',
@@ -59,7 +59,7 @@ Hopefully this is truly like butta for you 🧈. Cheers!
 This is the easy part. Just copy these lines of JavaScript code below and paste it just above the closing `</body>` tag:
 
 ```javascript
-<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/like-butta-smarty-us-address-autocomplete/src/like-butta-smarty-us-address-autocomplete.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/like-butta-smarty-us-address-autocomplete/src/like-butta-smarty-us-address-autocomplete.min.js"></script>
 <script>
   LikeButtaSmartyUsAddressAutocomplete({
     embeddedKey: 'YOUR SMARTY EMBEDDED KEY GOES HERE',
@@ -90,7 +90,7 @@ Modify the properties inside the function argument object as needed to match up 
 ...then you'll modify your JavaScript to look like this:
 
 ```javascript
-<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/like-butta-smarty-us-address-autocomplete/src/like-butta-smarty-us-address-autocomplete.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gwashington17760704/like-butta-smarty-us-address-autocomplete/src/like-butta-smarty-us-address-autocomplete.min.js"></script>
 <script>
   LikeButtaSmartyUsAddressAutocomplete({
     embeddedKey: 'YOUR SMARTY EMBEDDED KEY GOES HERE',
