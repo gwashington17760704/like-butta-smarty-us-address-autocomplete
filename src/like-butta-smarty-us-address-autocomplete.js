@@ -32,6 +32,7 @@
     const wrapperStyles = `
         display: inline-block; 
         position: relative;
+        width: 100%;
     `;
     
     const extendSettings = (defaults, options) => {
