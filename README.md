@@ -110,7 +110,7 @@ See the `/examples/example-minimal.html` file to see a working example.
 
 ## Props
 
-If you want to alter the colors and styling a bit you can include some additional properties to the single argument object that is passed into the `SmartyUSAddressAutocomplete()` function. Change these properties to suit your configuration and styling needs. Here's a description of each property.
+If you want to alter the colors and styling a bit you can include some additional properties to the single argument object that is passed into the `LikeButtaSmartyUSAddressAutocomplete()` function. Change these properties to suit your configuration and styling needs. Here's a description of each property.
 
 * `embeddedKey`
     * Description: This is a string containing your Smarty embedded key.
