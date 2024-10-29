@@ -7,8 +7,6 @@
   const MY_COOL_HUBSPOT_PORTAL_ID = 'YOUR HUBSPOT PORTAL ID';
   const MY_COOL_CONFIRMATION_PAGE = 'YOUR CONFIRMATION PAGE URL BEGINNING WITH https://';
   const MY_COOL_ERROR_MESSAGE = 'All fields are required.';
-  const MY_COOL_LEGAL_CONSENT_TO_PROCESS_MESSAGE = 'I agree to allow YOUR COMPANY NAME HERE to store and process my personal data according to the published Privacy Policy.';
-  const MY_COOL_LEGAL_CONSENT_TO_RECEIVE_COMMUNICATIONS_MESSAGE = 'I agree to receive communications from YOUR COMPANY NAME HERE';
 
   // Smarty Settings - change stuff between the quotes after the equals sign (keep the quotes).
   const MY_COOL_SMARTY_EMBEDDED_KEY = 'YOUR SMARTY EMBEDDED KEY GOES HERE';
@@ -61,17 +59,6 @@
                     "value": document.getElementById('myCoolZip').value
                 }
             ],
-            "legalConsentOptions": {
-                "consent": {
-                    "consentToProcess": true,
-                    "text": MY_COOL_LEGAL_CONSENT_TO_PROCESS_MESSAGE,
-                    "communications": [{
-                        "value": true,
-                        "subscriptionTypeId": 999,
-                        "text": MY_COOL_LEGAL_CONSENT_TO_RECEIVE_COMMUNICATIONS_MESSAGE
-                    }]
-                }
-            },
             "skipValidation": false,
             "context": {}
         };
